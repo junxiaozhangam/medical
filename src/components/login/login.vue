@@ -27,26 +27,25 @@ export default {
         }
     },
     methods: {
-        handleLogin(){
-            this.$http.post('login',this.formdata).then(
-                res => {
-                    console.log(res)
-                    const {
-                        data,
-                        meta:{msg,status}
-                    } = res.data
+        async handleLogin(){
+            const res= await this.$http.post('login',this.formdata)
+            console.log(res)
+            const {
+                data,
+                meta:{msg,status}
+            } = res.data
 
-                    console.log(status)
-                    if (status === '200' ){
-                        this.$router.push({name:'home'})
-                        this.$message.success(msg)
-                    }    
+            console.log(status)
+            if (status === '200' ){
+                this.$router.push({name:'home'})
+                this.$message.success(msg)
+            }    
 
-                    else {
-                        this.$message.warning(msg)
-                    }
+            else {
+                this.$message.warning(msg)
+            }
 
-                })
+            
         }
     }
     
